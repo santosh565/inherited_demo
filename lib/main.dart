@@ -28,7 +28,7 @@ class MyHomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: const Text("Contact Book"),
+          title: const Text("Inherited Widget demo"),
         ),
         body: const Text('data'));
   }
