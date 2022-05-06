@@ -14,7 +14,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
-      create: (_) => BreadCrumbProvider(),
+      create: (context) => BreadCrumbProvider(),
       child: MaterialApp(
         title: 'Flutter Demo',
         theme: ThemeData(
@@ -35,7 +35,7 @@ class BreadCrumb {
   final String uuid;
 
   BreadCrumb({
-    required this.isActive,
+    this.isActive = false,
     required this.name,
   }) : uuid = const Uuid().v4();
 
@@ -106,7 +106,7 @@ class MyHomePage extends StatelessWidget {
       body: Column(
         children: [
           Consumer<BreadCrumbProvider>(
-            builder: (context, value, child) {
+            builder: (context, value, _) {
               return BreadCrumbsWidget(
                 breadCrumbs: value.items,
               );
@@ -125,7 +125,7 @@ class MyHomePage extends StatelessWidget {
           ),
           TextButton(
             onPressed: () {
-              final provider = context.read<BreadCrumbProvider>().reset();
+              context.read<BreadCrumbProvider>().reset();
             },
             child: const Text('Reset'),
           ),
@@ -173,7 +173,14 @@ class _AddNewBreadCrumbScreenState extends State<AddNewBreadCrumbScreen> {
               controller: _controller,
             ),
             TextButton(
-              onPressed: () {},
+              onPressed: () {
+                final text = _controller.text;
+                if (text.isNotEmpty) {
+                  final breadCrumb = BreadCrumb(name: text);
+                  context.read<BreadCrumbProvider>().add(breadCrumb);
+                  Navigator.pop(context);
+                }
+              },
               child: const Text('Add'),
             )
           ],
