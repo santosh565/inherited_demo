@@ -19,8 +19,6 @@ class Minutes {
   Minutes() : value = currentDateTime();
 }
 
-
-
 class SecondsWidget extends StatelessWidget {
   const SecondsWidget({Key? key}) : super(key: key);
 
@@ -73,7 +71,6 @@ class MyHomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    debugPrint('homepage widget build');
     return Scaffold(
       appBar: AppBar(
         title: const Text('Default value'),
