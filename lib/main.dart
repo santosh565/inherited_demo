@@ -9,7 +9,7 @@ class Counter with ChangeNotifier {
   int count = 0;
 
   void increment() {
-    count += 5;
+    count++;
     notifyListeners();
   }
 }
@@ -25,7 +25,9 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
       ),
       home: ChangeNotifierProvider(
-          create: (context) => Counter(), child: const MyHomePage()),
+        create: (context) => Counter(),
+        child: const MyHomePage(),
+      ),
     );
   }
 }
